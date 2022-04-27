@@ -1,5 +1,17 @@
 <template>
     <img alt="Vue logo" src="./assets/logo.png" />
+    <!-- 异步请求 -->
+    <Suspense>
+        <template #default>
+            <div>
+                <AsyncShow />
+                <DogShow />
+            </div>
+        </template>
+        <template #fallback>
+            <h3>async loading</h3>
+        </template>
+    </Suspense>
     <h1>{{ count }}</h1>
     <h1>{{ double }}</h1>
     <ul>
@@ -24,6 +36,9 @@
 import { toRefs, computed, reactive, watch, ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import CommonModal from './components/CommonModal.vue'
+import AsyncShow from './components/AsyncShow.vue'
+import DogShow from './components/DogShow.vue'
+
 import useMousePosition from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
 
@@ -42,7 +57,7 @@ interface DogResult {
 
 export default {
     name: 'App',
-    components: { HelloWorld, CommonModal },
+    components: { HelloWorld, CommonModal, AsyncShow, DogShow },
     setup() {
         // const count = ref(0)
         // const double = computed(() => count.value * 2)
